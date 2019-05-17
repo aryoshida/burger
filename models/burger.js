@@ -1,4 +1,4 @@
-var orm = require("orm");
+var orm = require("../config/orm");
 
 var burger = {
     table: "burgers",
@@ -28,4 +28,4 @@ var burger = {
     }   
 }
 
-module.exports("burger.js");
+module.exports= burger.js;
