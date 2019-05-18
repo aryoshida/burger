@@ -1,5 +1,4 @@
 var express = require("express");
-var burgers = require("../models/burger.js");
 var router = express.Router();
 
 var burgerModels = require("../models/burger");
@@ -7,7 +6,7 @@ var burgerModels = require("../models/burger");
 router.get("/", function(req, res){
     burgerModels.selectAll(function(data){
         var object = {
-
+            burger: data
         };
         console.log(object);
         res.render("index", object);
@@ -29,9 +28,10 @@ router.put("/devoure_burger", function(req, res){
     console.log("condition", condition);
 
     burgerModels.updateOne({
-    
+        devoured: req.body.devoured
     }, condition, function(result){
         if (result.changedRows == 0){
+            //if no rows were changed then it was an invalid ID
             return res.status(404).end();
         } else {
             res.status(200).end();
