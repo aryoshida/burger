@@ -3,11 +3,7 @@ var orm = require("../config/orm");
 var burger = {
     table: "burgers",
     selectAll: function(callback){
-        var queryString = "SELECT * FROM burgers;";
-        connection.query(queryString, function(err, results){
-            if (err) throw err;
-            callback(results);
-        });
+        orm.selectAll(this.table, callback);
     },
 
     insertOne: function(input, callback){
@@ -15,17 +11,27 @@ var burger = {
     },
 
     updateOne: function(input, callback){
-        var id = input.id;
-        var burgerName = input.name;
-        var isEaten = input.isEaten ? 1 : 0;
-        var queryString = "UPDATE burgers SET burger_name = \'" + burgerName + "\' devoured = " + isEaten + " WHERE id = " + id;
-        connection.query(queryString, function(err, results){
-            if (err) throw err;
-            if(callback) {
-                callback(results);
-            }
-        });
+        orm.updateOne(this.table, input, callback);
     }   
 }
 
-module.exports= burger.js;
+
+// HOW A CALLBACK WOULD WORK USING THESE FUNCTIONS 
+//OPTION 1
+// var handleGetBurgers = function(results) {
+//     console.log(results);
+// }
+// burger.selectAll(handleGetBurgers)
+// SIMILAR TO THIS
+// var num = 10;
+// burger.add(num);
+
+//OPTION 2
+// burger.selectAll(function(results){
+//     console.log(results);
+// });
+// SIMILAR TO THIS
+// burger.add(10);
+
+
+module.exports=burger;

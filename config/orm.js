@@ -41,8 +41,7 @@ var orm = {
 
     updateOne: function(table, input, callback){
         var id = input.id;
-        var assignments = "";
-        var value = input.isEaten ? 1 : 0;
+        var setInput = ""; // what we need to set (keys & values)
         var queryString = "UPDATE "+ table;
         var comma = "";
         for(var key in input){
@@ -51,15 +50,12 @@ var orm = {
                 if(typeof value === "string" && value.indexOf(" ") >= 0){
                     value = "'" + value + "'";
                 }
-                columns += comma + key;
-                value += comma + value;
-                comma = ",";
+                setInput += comma + key + " = " + value;
+                comma = ", ";
             }
         }      
-        queryString += " SET ";
-        queryString += " (" + columns +") VALUES (" + values + ")";
-        queryString += " WHERE ";
-        queryString += id = input.id;
+        queryString += " SET " + setInput;
+        queryString += " WHERE id " + input.id;
 
         connection.query(queryString, function(err, results){
             if (err) throw err;
