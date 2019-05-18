@@ -34,4 +34,4 @@ var burger = {
 // burger.add(10);
 
 
-module.exports=burger;
+module.exports = burger;

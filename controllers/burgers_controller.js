@@ -13,7 +13,7 @@ router.get("/", function(req, res){
     });
 });
 
-router.post("/new_burger", function(req, res){
+router.post("/api/burgers", function(req, res){
     burgerModels.insertOne([
         "burgerName", "devoured"
     ], [
@@ -38,3 +38,5 @@ router.put("/devoure_burger", function(req, res){
         }
     });
 });
+
+module.exports = router;
