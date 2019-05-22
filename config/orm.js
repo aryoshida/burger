@@ -55,6 +55,9 @@ var orm = {
         for(var key in input){
             if(Object.hasOwnProperty.call(input, key)){
                 var value = input[key];
+                if(key === 'id') {
+                    continue;
+                }
                 if(typeof value === "string") {
                     value = "\"" + value + "\"";
                 }
@@ -70,7 +73,8 @@ var orm = {
             }
         }      
         queryString += " SET " + setInput;
-        queryString += " WHERE id " + input.id;
+        queryString += " WHERE id = " + input.id;
+        console.log(queryString);
 
         connection.query(queryString, function(err, results){
             if (err) throw err;

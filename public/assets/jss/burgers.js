@@ -1,17 +1,11 @@
 $(function(){
     $(".change-devoured").on("click", function(event){
         var id = $(this).data("id");
-        var newDevoured = $(this).data("newdevoured");
-        var devouredSatus = {
-            devoured: newDevoured
-        };
 
-        $.ajax("/api/burgers" + id,{
-            type: "PUT",
-            data: devouredSatus
+        $.ajax("/api/devoure_burger?id=" + id,{
+            type: "PUT"
         }).then(
             function(){
-                console.log("changed devoured to", newDevoured);
                 location.reload();
             }
         );
@@ -26,7 +20,7 @@ $(function(){
             devoured: 0
         };
 
-        $.ajax("/api/burgers", {
+        $.ajax("/api/add_burger", {
             type: "POST",
             data: newBurger
         }).then(
