@@ -17,12 +17,13 @@ $(function(){
         );
     });
 
-    $(".create-form").on("submit", function(event){
+    $("#burger-button").on("click", function(event){
         event.preventDefault();
+        console.log("CLICKED================");
 
         var newBurger = {
             burger_name: $("#ca").val().trim(),
-            devoured: $("[name=devoured:checked").val().trim()
+            devoured: 0
         };
 
         $.ajax("/api/burgers", {

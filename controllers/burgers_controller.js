@@ -6,19 +6,27 @@ var burgerModels = require("../models/burger");
 router.get("/", function(req, res){
     burgerModels.selectAll(function(data){
         var object = {
-            burger: data
+            burgers: data
         };
+        console.log('--------------------------');
         console.log(object);
+        console.log('--------------------------');
         res.render("index", object);
     });
 });
 
 router.post("/api/burgers", function(req, res){
-    burgerModels.insertOne([
-        "burgerName", "devoured"
-    ], [
-        req.body.burgerName, req.body.devoured
-    ], function(result){
+    console.log("api burgers");
+    var burger_data = req.body;
+    if(burger_data.devoured === '1' || burger_data.devoured === 'true') {
+        burger_data.devoured = 1;
+    } else {
+        burger_data.devoured = 0;
+    }
+    console.log(burger_data);
+    burgerModels.insertOne(burger_data, function(result){
+        console.log("Inserted correctly!");
+        console.log(result);
         res.json({ id: result.insertId });
     });
 });

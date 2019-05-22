@@ -14,7 +14,10 @@ app.use(function(req,res,next){
 
 //handlebars
 var exphbs = require("express-handlebars");
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.engine("handlebars", exphbs({
+     defaultLayout: "main",
+     partialsDir: __dirname + "/views/layouts/partials"
+}));
 app.set("view engine", "handlebars");
 
 //routes

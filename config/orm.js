@@ -20,8 +20,15 @@ var orm = {
             if (Object.hasOwnProperty.call(input, key)) {
                 var value = input[key];
                 // if string with spaces, add quotations (Lana Del Grey => 'Lana Del Grey')
-                if (typeof value === "string" && value.indexOf(" ") >= 0) {
-                    value = "'" + value + "'";
+                if (typeof value === "string") {
+                    value = "\"" + value + "\"";
+                }
+                if (typeof value === "boolean") {
+                    if(value) {
+                        value = 1;
+                    } else {
+                        value = 0;
+                    }
                 }
                 columns += comma + key; // add key for database columns
                 values += comma + value; // add value for database
@@ -30,6 +37,7 @@ var orm = {
         }
         // finish querystring
         queryString += " (" + columns +") VALUES (" + values + ")";
+        console.log(queryString);
         // INSERT INTO BURGERS (burger_name,devoured) VALUES ('myBurger',0)
         connection.query(queryString, function(err, results){
             if (err) throw err;
@@ -47,8 +55,15 @@ var orm = {
         for(var key in input){
             if(Object.hasOwnProperty.call(input, key)){
                 var value = input[key];
-                if(typeof value === "string" && value.indexOf(" ") >= 0){
-                    value = "'" + value + "'";
+                if(typeof value === "string") {
+                    value = "\"" + value + "\"";
+                }
+                if (typeof value === "boolean") {
+                    if(value) {
+                        value = 1;
+                    } else {
+                        value = 0;
+                    }
                 }
                 setInput += comma + key + " = " + value;
                 comma = ", ";
