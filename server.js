@@ -2,6 +2,8 @@ var express = require("express");
 var PORT = process.env.PORT || 8080;
 var app = express();
 
+process.env.NODE_ENV = 'deploy';
+
 app.use(function(req, res, next) {
     express.urlencoded({ extended: true })(req,res,next);
 });
