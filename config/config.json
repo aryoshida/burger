@@ -2,8 +2,8 @@
     "deploy": {
       "username": "axwzwwxwnw78smz6",
       "password": "q73f98vgu2xwsyt1",
-      "database": "burgers_db",
-      "host": "127.0.0.1",
+      "database": "j2ad2goeznjc6588",
+      "host": "l9dwvv6j64hlhpul.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
       "port": 3306,
       "dialect": "mysql"
     },
